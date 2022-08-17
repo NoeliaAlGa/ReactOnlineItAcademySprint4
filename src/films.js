@@ -43,8 +43,11 @@ function orderAlphabetically(array) {
 }
 
 // Exercise 5: Order by year, ascending
-function orderByYear() {
-
+function orderByYear(array) {
+  const yearOrder = [...array]
+                      .sort((nextFilm, currentFilm) => nextFilm.year - currentFilm.year 
+                                                       || nextFilm.title.localeCompare(currentFilm.title));
+  return yearOrder;
 }
 
 // Exercise 6: Calculate the average of the movies in a category
