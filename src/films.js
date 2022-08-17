@@ -16,7 +16,6 @@ function getMoviesFromDirector(array, director) {
 
 // Exercise 3: Calculate the average of the films of a given director.
 function moviesAverage(array) {
-  debugger;
   const filmScore = array
                     .map(currentMovie => currentMovie.score)
                     .filter(score => score !== '');
@@ -55,15 +54,39 @@ function orderByYear(array) {
 
 // Exercise 6: Calculate the average of the movies in a category
 function moviesAverageByCategory(array, category) {
-  debugger;
   const categoryList = [...array].filter(currentMovie => currentMovie.genre.map(genre => genre) == category);
   const averageCategory = moviesAverage(categoryList);
   return averageCategory;
 }
 
 // Exercise 7: Modify the duration of movies to minutes
-function hoursToMinutes() {
+function hoursToMinutes(array) {
+  debugger;
+  const durationToMinutes = [...array]
+                            .map((currentMovie) => {
+                              let duracion = 0;
+                              let horas = 0;
+                              let minutos = 0;
+                              let currentMovieCopi = {...currentMovie};
 
+                              if(currentMovieCopi.duration.includes(" ")) {
+                                const duracionDividido = currentMovieCopi.duration.trim().split(" ");
+                                horas = Number(duracionDividido[0].replace("h", ""));
+                                minutos = Number(duracionDividido[1].replace("min", ""));
+                              }
+                              else {
+                                if(currentMovieCopi.duration.includes("h")) {
+                                  horas = Number(currentMovieCopi.duration.replace("h", ""));
+                                }
+                                else {
+                                  minutos = Number(currentMovieCopi.duration.replace("min", ""));
+                                }
+                              }
+                              duracion = (horas * 60) + minutos;
+                              currentMovieCopi.duration = duracion;
+                              return currentMovieCopi;
+                            });
+  return durationToMinutes;
 }
 
 // Exercise 8: Get the best film of a year
